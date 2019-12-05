@@ -10,7 +10,7 @@ namespace PKMService
 {
     public class WCFService : IWCFServicePKM
     {
-        [PrincipalPermission(SecurityAction.Demand, Role = "NekaDozvola")]
+        [PrincipalPermission(SecurityAction.Demand, Role = "Add")]
 
         public void sendMess(string mess)
         {
