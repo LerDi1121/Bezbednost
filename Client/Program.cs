@@ -16,7 +16,12 @@ namespace Client
 
             using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
             {
-                proxy.sendMess("nja nja nja");
+                while(true)
+                {
+                    Console.WriteLine("Unesite poruku: \n ");
+                    proxy.sendMess( Console.ReadLine());
+                    Console.WriteLine("Poruka poslata \n\n");
+                }
             }
 
             Console.ReadLine();
