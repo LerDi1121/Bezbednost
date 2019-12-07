@@ -15,13 +15,15 @@ namespace Client
             string address = "net.tcp://localhost:9999/WCFService";
 
             using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
-            {
-                while(true)
-                {
-                    Console.WriteLine("Unesite poruku: \n ");
-                    proxy.sendMess( Console.ReadLine());
-                    Console.WriteLine("Poruka poslata \n\n");
-                }
+            {   proxy.SingUp();
+                    proxy.SingIn();
+                    proxy.savePassword("facebook", "nesto");
+                    proxy.deletePassword("facebook", "nesto");
+                    proxy.changePassword("facebook", "nesto", "nesto");
+                    proxy.readAllPassword();
+                    proxy.readPasswordFor("facebook");
+
+
             }
 
             Console.ReadLine();

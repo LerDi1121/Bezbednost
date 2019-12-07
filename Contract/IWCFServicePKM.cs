@@ -12,6 +12,18 @@ namespace Contracts
     {
 
         [OperationContract]
-        void sendMess(string mess);
+        bool SingUp();
+        [OperationContract]
+        bool SingIn();
+        [OperationContract]
+        bool savePassword(string acc, string pass);
+        [OperationContract]
+        string readAllPassword();
+        [OperationContract]
+        string readPasswordFor(string acc);
+        [OperationContract]
+        bool changePassword(string acc,string newPassword, string oldPassword);
+        [OperationContract]
+        bool deletePassword(string acc, string Password);
     }
 }
