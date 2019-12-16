@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contract
 {
+    [ServiceContract]
     public interface IWCFServicePCM
     {
         [OperationContract]

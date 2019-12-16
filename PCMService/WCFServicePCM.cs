@@ -11,12 +11,15 @@ namespace PCMService
     {
         public string getPassword(int numOfChar)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("getPassword " +numOfChar);
+            return "sadasda";
         }
 
         public string getRndPassword()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("getRndPassword");
+            return "sadasda";
         }
     }
-}
+    }
+

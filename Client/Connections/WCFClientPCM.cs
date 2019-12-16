@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Client.Connections
 {
-    class WCFClientPCM : ChannelFactory<IWCFServicePCM>, IWCFServicePCM, IDisposable
+   public class WCFClientPCM : ChannelFactory<IWCFServicePCM>, IWCFServicePCM, IDisposable
     {
         IWCFServicePCM factory;
 
@@ -25,12 +25,12 @@ namespace Client.Connections
             try
             {
                 str=factory.getPassword(9);
-                Console.WriteLine("success changePassword.");
+                Console.WriteLine("success getPassword.");
                
             }
             catch (SecurityAccessDeniedException e)
             {
-                Console.WriteLine("Error while trying to changePassword. Error message : {0}", e.Message);
+                Console.WriteLine("Error while trying to getPassword. Error message : {0}", e.Message);
             }
             return str;
         }
@@ -41,12 +41,12 @@ namespace Client.Connections
             try
             {
                 str = factory.getRndPassword();
-                Console.WriteLine("success changePassword.");
+                Console.WriteLine("success getRndPassword.");
 
             }
             catch (SecurityAccessDeniedException e)
             {
-                Console.WriteLine("Error while trying to changePassword. Error message : {0}", e.Message);
+                Console.WriteLine("Error while trying to getRndPassword. Error message : {0}", e.Message);
             }
             return str;
         }

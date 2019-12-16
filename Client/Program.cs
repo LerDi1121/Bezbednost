@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Connections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -22,6 +23,16 @@ namespace Client
                     proxy.changePassword("facebook", "nesto", "nesto");
                     proxy.readAllPassword();
                     proxy.readPasswordFor("facebook");
+
+
+            }
+            string address2 = "net.tcp://localhost:9999/WCFServicePCM";
+
+
+            using (WCFClientPCM proxy = new WCFClientPCM(binding, new EndpointAddress(new Uri(address2))))
+            {
+                proxy.getPassword(5);
+                proxy.getRndPassword();
 
 
             }
