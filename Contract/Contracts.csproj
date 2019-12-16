@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertManager.cs" />
+    <Compile Include="Formatter.cs" />
+    <Compile Include="IWCFServicePCM.cs" />
     <Compile Include="IWCFServicePKM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

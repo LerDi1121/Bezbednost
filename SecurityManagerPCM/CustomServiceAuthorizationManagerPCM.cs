@@ -5,9 +5,9 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecutityManager
+namespace SecurityManagerPCM
 {
-    public class CustomServiceAuthorizationManager: ServiceAuthorizationManager
+    public class CustomServiceAuthorizationManagerPCM : ServiceAuthorizationManager
     {
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
@@ -16,9 +16,9 @@ namespace SecutityManager
              * pozvati IsInRole u nasem principalu
              * */
 
-            CustomPrincipalPKM principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as CustomPrincipalPKM;
-           return principal.IsInRole("Read");
-            
+            CustomPrincipalPCM principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as CustomPrincipalPCM;
+            return principal.IsInRole("Read");
+
         }
     }
 }

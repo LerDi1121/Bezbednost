@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace SecutityManager
 {
-    public class CustomAuthorizationPolicy : IAuthorizationPolicy
+    public class CustomAuthorizationPolicyPKM : IAuthorizationPolicy
     {
-        public CustomAuthorizationPolicy()
+        public CustomAuthorizationPolicyPKM()
         {
             Id = Guid.NewGuid().ToString();
         }
@@ -39,7 +39,7 @@ namespace SecutityManager
             }
 
             evaluationContext.Properties["Principal"] =
-                new CustomPrincipal((WindowsIdentity)identities[0]);
+                new CustomPrincipalPKM((WindowsIdentity)identities[0]);
             return true;
         }
 

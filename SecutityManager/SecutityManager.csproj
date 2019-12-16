@@ -43,11 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="CustomAuthorizationPolicy.cs" />
-    <Compile Include="CustomPrincipal.cs" />
+    <Compile Include="CustomAuthorizationPolicyPKM.cs" />
+    <Compile Include="CustomPrincipalPKM.cs" />
     <Compile Include="CustomServiceAuthorizationManager.cs" />
-    <Compile Include="Formatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleConfig.cs" />
     <Compile Include="RoleConfigFile.Designer.cs">
@@ -61,6 +59,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RoleConfigFile.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contract\Contracts.csproj">
+      <Project>{6a1c1e71-8ed1-476d-aa91-f54f9c09bb5c}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

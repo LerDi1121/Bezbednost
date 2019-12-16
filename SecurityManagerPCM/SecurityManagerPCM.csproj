@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEE4ACE6-5ABA-4DEA-82BB-03F7EB824A61}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>PCMService</RootNamespace>
-    <AssemblyName>PCMService</AssemblyName>
+    <ProjectGuid>{77161401-E5A1-45F2-90AA-638BC3F5D3FD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SecurityManagerPCM</RootNamespace>
+    <AssemblyName>SecurityManagerPCM</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,23 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\PCMServiceHost.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="CustomAuthorizationPolicyPCM.cs" />
+    <Compile Include="CustomprincipalPCM.cs" />
+    <Compile Include="CustomServiceAuthorizationManagerPCM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WCFServicePCM.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Contract\Contracts.csproj">
-      <Project>{6A1C1E71-8ED1-476D-AA91-F54F9C09BB5C}</Project>
-      <Name>Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SecurityManagerPCM\SecurityManagerPCM.csproj">
-      <Project>{77161401-e5a1-45f2-90aa-638bc3f5d3fd}</Project>
-      <Name>SecurityManagerPCM</Name>
-    </ProjectReference>
+    <Compile Include="ServiceAuthorizationManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

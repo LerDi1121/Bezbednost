@@ -4,14 +4,16 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Security.Principal;
 using System.Text;
+using Contract;
 using System.Threading.Tasks;
+using Formatter = Contract.Formatter;
 
 namespace SecutityManager
 {
-    public class CustomPrincipal: IPrincipal
+    public class CustomPrincipalPKM: IPrincipal
     {
         WindowsIdentity identity = null;
-        public CustomPrincipal(WindowsIdentity windowsIdentity)
+        public CustomPrincipalPKM(WindowsIdentity windowsIdentity)
         {
             identity = windowsIdentity;
         }

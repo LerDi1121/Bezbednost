@@ -5,14 +5,15 @@ using System.Security.Permissions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Contract;
 using Contracts;
 using SecutityManager;
 
     namespace PKMService
 {
-    public class WCFService : IWCFServicePKM
+    public class WCFServicePKM : IWCFServicePKM
     {
-        [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
+        [PrincipalPermission(SecurityAction.Demand, Role = "neka")]
         public bool changePassword(string acc, string newPassword, string oldPassword)
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
@@ -44,6 +45,7 @@ using SecutityManager;
             return "";
             //procitati sifru za taj acc
         }
+
         [PrincipalPermission(SecurityAction.Demand, Role = "Add")]
         public bool savePassword(string acc, string pass)
         {

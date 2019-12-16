@@ -44,9 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\WCFClientPCM.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WCFClient.cs" />
+    <Compile Include="Connections\WCFClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
