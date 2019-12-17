@@ -19,30 +19,38 @@ namespace Client
             string address = "net.tcp://localhost:9999/WCFServicePKM";
 
             using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
-            {   proxy.SingUp();
+            {
+                Console.ReadKey();
+                    proxy.SingUp();
                     proxy.SingIn();
                     proxy.savePassword("facebook", "nesto");
+                    proxy.savePassword("facebook", "nesto");
+                    proxy.savePassword("skype", "123");
                     proxy.deletePassword("facebook", "nesto");
                     proxy.changePassword("facebook", "nesto", "nesto");
+                    proxy.changePassword("skype", "nova", "123");
                     proxy.readAllPassword();
                     proxy.readPasswordFor("facebook");
+                proxy.readPasswordFor("skype");
+
 
 
             }
+
             string address2 = "net.tcp://localhost:9998/WCFServicePCM";
             NetTcpBinding binding2 = new NetTcpBinding();
             Console.ReadKey();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            X509Certificate2 ClientCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "client");
-            string name = Formatter.ParseName(WindowsIdentity.GetCurrent().Name);
+            X509Certificate2 ClientCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfservice");//sertifikat servera 
 
-          /* using (WCFClientPCM proxy = new WCFClientPCM(binding2, new EndpointAddress(new Uri(address2),    new X509CertificateEndpointIdentity(ClientCert) )))
+         //odji u klasu wcfClientPMC 
+           using (WCFClientPCM proxy = new WCFClientPCM(binding2, new EndpointAddress(new Uri(address2),  new X509CertificateEndpointIdentity(ClientCert) )))
             {
                 proxy.getPassword(5);
                 proxy.getRndPassword();
 
 
-            }*/
+            }
 
             Console.ReadLine();
         }

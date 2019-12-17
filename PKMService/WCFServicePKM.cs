@@ -13,20 +13,42 @@ using SecutityManager;
 {
     public class WCFServicePKM : IWCFServicePKM
     {
-        [PrincipalPermission(SecurityAction.Demand, Role = "neka")]
+        [PrincipalPermission(SecurityAction.Demand, Role = "Modify")]
         public bool changePassword(string acc, string newPassword, string oldPassword)
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine( userName+ " -> changePassword");
-            return true;
+
+            if (Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            {
+                if (Database.AllUsers[userName].AccountAndPassword[acc] == oldPassword)
+                {
+                    Database.AllUsers[userName].AccountAndPassword[acc] = newPassword;
+                    return true;
+                }
+            }
+            return false;
             //menjanje sifre
         }
+
+
         [PrincipalPermission(SecurityAction.Demand, Role = "Delete")]
         public bool deletePassword(string acc, string Password)
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> deletePassword");
-            return true;
+
+            
+            if(Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            {
+                if(Database.AllUsers[userName].AccountAndPassword[acc] == Password)
+                {
+                    Database.AllUsers[userName].AccountAndPassword.Remove(acc);
+                    return true;
+                }
+            }
+
+            return false;
             //obrisi sifru
         }
 
@@ -34,7 +56,14 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> readAllPassword");
-            return "";
+
+            string str = "";
+            
+            foreach(var s in Database.AllUsers[userName].AccountAndPassword)
+            {
+                str += s.Key + "*" + s.Value + "/";
+            }
+            return str;
             //procitati sve sifre
         }
 
@@ -42,7 +71,16 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> readPasswordFor");
-            return "";
+
+            if(Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            {
+                return Database.AllUsers[userName].AccountAndPassword[acc];
+            }
+            else
+            {
+                return "";
+            }
+
             //procitati sifru za taj acc
         }
 
@@ -51,9 +89,14 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> savePassword");
-            return true;
-            //dodati sifru u dictionary tog usera
 
+            if(!Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            {
+                Database.AllUsers[userName].AccountAndPassword[acc] = pass;
+                return true;
+            }
+            return false;
+            //dodati sifru u dictionary tog usera
         }
 
        
@@ -72,7 +115,14 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);//trenutno ime klijenta koji pristupa metodi
             Console.WriteLine(userName + " -> SingUp");
-            return true;
+            if(!Database.AllUsers.ContainsKey(userName))
+            {
+                User u = new User();
+                u.Username = userName;
+                Database.AllUsers.Add(userName, u);
+                return true;
+            }
+            return false;          
             //prilikom prvog poziva napraviti usera i dodati u dictionary
         }
     }

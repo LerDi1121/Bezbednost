@@ -8,8 +8,9 @@ namespace PKMService
 {
     public class Database
     {
-        static Dictionary<string, User> AllUsers { get; set; }
+        public static Dictionary<string, User> AllUsers { get; set; }
 
+        
         public void ReadData()
         {
             //citanje iz neke baze

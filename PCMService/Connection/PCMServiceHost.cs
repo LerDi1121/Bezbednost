@@ -32,8 +32,8 @@ namespace PCMService.Connection
             host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
 
 
-            host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.ChainTrust;
-            // host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();//****
+             host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+             host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new Servicecertvalidation();//****
            
             ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
             host.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;

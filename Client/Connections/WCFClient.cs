@@ -25,9 +25,16 @@ namespace Client
 
             try
             {
-                factory.changePassword(acc, newPassword, oldPassword);
-                Console.WriteLine("success changePassword.");
-                Logger.LogSuccessEvent("proba", "nesto");
+               
+                if (factory.changePassword(acc, newPassword, oldPassword))
+                {
+                    Console.WriteLine("password successfully changed");
+                }
+                else
+                {
+                    Console.WriteLine("password didn't change successfully");
+                }
+              //  Logger.LogSuccessEvent("proba", "nesto");
                 return true;
             }
             catch (SecurityAccessDeniedException e)
@@ -43,10 +50,18 @@ namespace Client
         {
             try
             {
-                factory.deletePassword(acc, Password);
-                Console.WriteLine("success deletePassword.");
+                
+                if(factory.deletePassword(acc, Password))
+                {
+                    Console.WriteLine("Password deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Password wasn't deleted successfully.");
+                }
                 return true;
             }
+
             catch (SecurityAccessDeniedException e)
             {
                 Console.WriteLine("Error while trying to deletePassword. Error message : {0}", e.Message);
@@ -62,6 +77,13 @@ namespace Client
             {
                 pass = factory.readAllPassword();
                 Console.WriteLine("success readAllPassword.");
+                string[] accPass = pass.Split('/');
+                foreach (var item in accPass)
+                {
+                    if (item == "")
+                        break;
+                    Console.WriteLine("Acc: " + item.Split('*')[0] +" -> " + item.Split('*')[1]);
+                }
                 return pass;
             }
             catch (SecurityAccessDeniedException e)
@@ -78,7 +100,11 @@ namespace Client
             try
             {
                 pass=factory.readPasswordFor(acc);
-                Console.WriteLine("success readPasswordFor.");
+                if(pass =="")
+                {
+                    return "";
+                }
+                Console.WriteLine("Pass for "+acc+" : " +pass);
                 return pass;
             }
             catch (SecurityAccessDeniedException e)
@@ -96,8 +122,15 @@ namespace Client
              
             try
             {
-                factory.savePassword(acc, pass);
-                Console.WriteLine("success savePassword.");
+                if (factory.savePassword(acc, pass))
+                {
+                    Console.WriteLine("New password saved successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("New password wasn't saved successfully.");
+                }
+               
                 return true;
             }
             catch (SecurityAccessDeniedException e)

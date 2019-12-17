@@ -53,7 +53,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RoleConfigFile.resx</DependentUpon>
     </Compile>
-    <Compile Include="ServicePCMCertValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RoleConfigFile.resx">

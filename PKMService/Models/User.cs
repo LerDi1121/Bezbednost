@@ -10,6 +10,10 @@ namespace PKMService
     {
         public string Username { get; set; }
         public Dictionary<string,string> AccountAndPassword { get; set; }
+        public User()
+        {
+            AccountAndPassword = new Dictionary<string, string>();
+        }
 
     }
 }
