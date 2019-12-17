@@ -30,31 +30,55 @@ namespace Contract
             }
 
         }
-        public static void LogSuccessEvent(string username, string events)
+
+        public static void AuthenticationSuccess(string userName)
         {
+            string UserAuthenticationSuccess = AuditEvents.UserAuthenticationSuccess;
+
             if (customLog != null)
             {
-                string message = string.Format("user {0} do {1} ", username, events);
-                customLog.WriteEntry(message, EventLogEntryType.SuccessAudit);
+                string message = string.Format(UserAuthenticationSuccess, userName);
+                customLog.WriteEntry(message);
             }
             else
             {
-                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.",events));
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthenticationSuccess));
             }
         }
-        public static void LogErrorEvent(string username, string events)
+
+        public static void AuthorizationSuccess(string userName, string serviceName)
         {
+            string UserAuthorizationSuccess = AuditEvents.UserAuthorizationSuccess;
             if (customLog != null)
             {
-                string message = string.Format("user {0} do {1} ", username, events);
+                string message = string.Format(UserAuthorizationSuccess, userName, serviceName);
+                customLog.WriteEntry(message);
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthorizationSuccess));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="serviceName"> should be read from the OperationContext as follows: OperationContext.Current.IncomingMessageHeaders.Action</param>
+        /// <param name="reason">permission name</param>
+        public static void AuthorizationFailed(string userName, string serviceName, string reason)
+        {
+            string UserAuthorizationFailed = AuditEvents.UserAuthorizationFailed;
+            if (customLog != null)
+            {
+                string message = string.Format(UserAuthorizationFailed, userName, serviceName, reason);
                 customLog.WriteEntry(message, EventLogEntryType.Error);
             }
             else
             {
-                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", events));
+                throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthorizationFailed));
             }
         }
-
         public  void Dispose()
         {
             if (customLog != null)

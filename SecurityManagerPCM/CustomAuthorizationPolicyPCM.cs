@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contract;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
@@ -28,11 +29,11 @@ namespace SecurityManagerPCM
             IIdentity identity = identities[0];
             try
             {
-                //Audit.AuthenticationSuccess("usernameParam");
+               // Logger.AuthenticationSuccess("usernameParam");
             }
             catch
             {
-             //   throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthenticationSuccess));
+              //  throw new ArgumentException(string.Format("Error while trying to write event (eventid = {0}) to event log.", (int)AuditEventTypes.UserAuthenticationSuccess));
             }
             evaluationContext.Properties["Principal"] = new CustomPrincipalPCM(identities[0]);
             return true;
