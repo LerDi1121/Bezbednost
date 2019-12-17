@@ -11,6 +11,7 @@ namespace PCMService
     {
         public string getPassword(int numOfChar)
         {
+            //validacija 
             Console.WriteLine("getPassword " +numOfChar);
             return "sadasda";
         }

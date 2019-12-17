@@ -21,16 +21,20 @@ namespace PCMService.Connection
         {
             NetTcpBinding binding = new NetTcpBinding();
             binding.Security.Mode = SecurityMode.Transport;
-            binding.Security.Mode = SecurityMode.Transport;
             //sertifikati
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            string address = "net.tcp://localhost:9999/WCFServicePCM";
+            string address = "net.tcp://localhost:9998/WCFServicePCM";
 
             host = new ServiceHost(typeof(WCFServicePCM));
             host.AddServiceEndpoint(typeof(IWCFServicePCM), binding, address);
-            host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.ChainTrust;
-            //serviceHost.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();
 
+            host.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+            host.Description.Behaviors.Add(new ServiceDebugBehavior() { IncludeExceptionDetailInFaults = true });
+
+
+            host.Credentials.ClientCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.ChainTrust;
+            // host.Credentials.ClientCertificate.Authentication.CustomCertificateValidator = new ServiceCertValidator();//****
+           
             ///If CA doesn't have a CRL associated, WCF blocks every client because it cannot be validated
             host.Credentials.ClientCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
 

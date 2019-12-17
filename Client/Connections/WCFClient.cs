@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using Contract;
+using Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Client
             {
                 factory.changePassword(acc, newPassword, oldPassword);
                 Console.WriteLine("success changePassword.");
+                Logger.LogSuccessEvent("proba", "nesto");
                 return true;
             }
             catch (SecurityAccessDeniedException e)
