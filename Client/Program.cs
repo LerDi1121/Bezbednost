@@ -41,10 +41,10 @@ namespace Client
             NetTcpBinding binding2 = new NetTcpBinding();
             Console.ReadKey();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            X509Certificate2 ClientCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "wcfservice");//sertifikat servera 
-
+            X509Certificate2 ServCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, "wcfservice");//sertifikat servera 
+            EndpointAddress Endaddress = new EndpointAddress(new Uri(address2), new X509CertificateEndpointIdentity(ServCert));
          //odji u klasu wcfClientPMC 
-           using (WCFClientPCM proxy = new WCFClientPCM(binding2, new EndpointAddress(new Uri(address2),  new X509CertificateEndpointIdentity(ClientCert) )))
+           using (WCFClientPCM proxy = new WCFClientPCM(binding2, Endaddress))
             {
                 proxy.getPassword(5);
                 proxy.getRndPassword();

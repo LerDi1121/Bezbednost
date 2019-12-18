@@ -18,10 +18,12 @@ namespace Client.Connections
         public WCFClientPCM(NetTcpBinding binding, EndpointAddress address)
             : base(binding, address)
         {
+    
               this.Credentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.Custom;//custom validacija sa serverima
             this.Credentials.ServiceCertificate.Authentication.CustomCertificateValidator = new ClientCertVerification();//mi pravimo custom validaciju u ovoj klasui 
             //zaproveru da lli je izdalo isto lice od poverenja
             this.Credentials.ServiceCertificate.Authentication.RevocationMode = X509RevocationMode.NoCheck;
+
             this.Credentials.ClientCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, "client");// ovde ide sertifikad od klijenta
        
 
