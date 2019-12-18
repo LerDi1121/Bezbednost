@@ -15,10 +15,11 @@ namespace Client
     {
         static void Main(string[] args)
         {
+            Console.ReadKey();
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/WCFServicePKM";
 
-            using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
+         /*   using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
             {
                 Console.ReadKey();
                     proxy.SingUp();
@@ -35,13 +36,13 @@ namespace Client
 
 
 
-            }
+            }*/
 
             string address2 = "net.tcp://localhost:9998/WCFServicePCM";
             NetTcpBinding binding2 = new NetTcpBinding();
             Console.ReadKey();
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
-            X509Certificate2 ServCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, "wcfservice");//sertifikat servera 
+            X509Certificate2 ServCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, "Selenic");//sertifikat servera 
             EndpointAddress Endaddress = new EndpointAddress(new Uri(address2), new X509CertificateEndpointIdentity(ServCert));
          //odji u klasu wcfClientPMC 
            using (WCFClientPCM proxy = new WCFClientPCM(binding2, Endaddress))
