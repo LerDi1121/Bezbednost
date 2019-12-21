@@ -11,43 +11,77 @@ namespace PCMService
     {
         public string getPassword(int numOfChar)
         {
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890`~!@#$%^&*()_+";
+            const string validLower = "abcdefghijklmnopqrstuvwxyz";
+            const string validUper = "ABCDEFGHIJKLMNOPQRSTUVWXY";
+            const string validNumber = "Z1234567890";
+            const string validSpecial = "`~!@#$%^&*()_+";
             StringBuilder res = new StringBuilder();
             Random rnd = new Random();
-            while (0 < numOfChar--)
+
+
+            int lengthUpper = numOfChar/4;
+        
+            int lengthNuber = numOfChar / 4;
+            int lengthSpecial = numOfChar / 4;
+            int lengthLower = numOfChar -(lengthUpper+ lengthNuber+ lengthSpecial);
+            while (0 < lengthUpper--)
             {
-                res.Append(valid[rnd.Next(valid.Length)]);
+                res.Append(validLower[rnd.Next(validLower.Length)]);
             }
+
+            while (0 < lengthLower--)
+            {
+                res.Append(validUper[rnd.Next(validUper.Length)]);
+            }
+
+            while (0 < lengthNuber--)
+            {
+                res.Append(validNumber[rnd.Next(validNumber.Length)]);
+            }
+
+            while (0 < lengthSpecial--)
+            {
+                res.Append(validSpecial[rnd.Next(validSpecial.Length)]);
+            }
+
             return res.ToString();
-            return numOfChar.ToString();
+
         }
 
         public string getRndPassword()
         {
-            //StringBuilder builder = new StringBuilder();
-            //Random random = new Random();
-            //char ch;
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
-            //    builder.Append(ch);
-            //} 
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXY";
-            const string valid2 = "Z1234567890`~!@#$%^&*()_+";
+            //rnd pass of 6 character
+            const string validLower = "abcdefghijklmnopqrstuvwxyz";
+            const string validUper="ABCDEFGHIJKLMNOPQRSTUVWXY";
+            const string validNumber = "Z1234567890";
+           const string validSpecial="`~!@#$%^&*()_+";
             StringBuilder res = new StringBuilder();
             Random rnd = new Random();
-            int length = 4;
-            while (0 < length--)
+            int lengthUpper = 1;
+            int lengthLower = 3;
+            int lengthNuber = 1;
+            int lengthSpecial = 1;
+            while (0 < lengthUpper--)
             {
-                res.Append(valid[rnd.Next(valid.Length)]);
+                res.Append(validLower[rnd.Next(validLower.Length)]);
             }
-            int length2 = 4;
-            while (0 < length2--)
+
+            while (0 < lengthLower--)
             {
-                res.Append(valid2[rnd.Next(valid2.Length)]);
+                res.Append(validUper[rnd.Next(validUper.Length)]);
             }
+
+            while (0 < lengthNuber--)
+            {
+                res.Append(validNumber[rnd.Next(validNumber.Length)]);
+            }
+
+            while (0 < lengthSpecial--)
+            {
+                res.Append(validSpecial[rnd.Next(validSpecial.Length)]);
+            }
+
             return res.ToString();
-         
         }
     }
     }

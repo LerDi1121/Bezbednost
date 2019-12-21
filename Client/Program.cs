@@ -47,7 +47,7 @@ namespace Client
          //odji u klasu wcfClientPMC 
            using (WCFClientPCM proxy = new WCFClientPCM(binding2, Endaddress))
             {
-                proxy.getPassword(5);
+                proxy.getPassword(10);
                 proxy.getRndPassword();
 
 

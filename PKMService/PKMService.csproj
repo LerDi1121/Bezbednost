@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection\PKMServiceHost.cs" />
+    <Compile Include="Models\AccAndPass.cs" />
     <Compile Include="Models\Database.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

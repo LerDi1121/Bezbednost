@@ -18,7 +18,7 @@ namespace PKMService
     {
         static void Main(string[] args)
         {
-            Database.AllUsers = new Dictionary<string, User>();
+     
 
             PKMServiceHost Pkm = new PKMServiceHost();
 

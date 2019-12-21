@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Contract;
 using Contracts;
+using PKMService.Models;
 using SecutityManager;
 
     namespace PKMService
@@ -18,13 +19,22 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine( userName+ " -> changePassword");
-
-            if (Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            User TempUser = Database.ReadData(userName);
+            if (TempUser == null)
             {
-                if (Database.AllUsers[userName].AccountAndPassword[acc] == oldPassword)
+                throw new FieldAccessException("Please sign up");
+            }
+
+            foreach(AccAndPass ap in TempUser.AccountAndPassword)
+            {
+                if(ap.Key.Equals(acc) && ap.Value.Equals(oldPassword))
                 {
-                    Database.AllUsers[userName].AccountAndPassword[acc] = newPassword;
+                    TempUser.AccountAndPassword.Remove(ap);
+                    ap.Value = newPassword;
+                    TempUser.AccountAndPassword.Add(ap);
+                    Database.WriteData(TempUser);
                     return true;
+
                 }
             }
             return false;
@@ -37,14 +47,21 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> deletePassword");
-
-            
-            if(Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            User TempUser = Database.ReadData(userName);
+            if (TempUser == null)
             {
-                if(Database.AllUsers[userName].AccountAndPassword[acc] == Password)
+                throw new FieldAccessException("Please sign up");
+            }
+
+            foreach (AccAndPass ap in TempUser.AccountAndPassword)
+            {
+                if (ap.Key.Equals(acc) && ap.Value.Equals(Password))
                 {
-                    Database.AllUsers[userName].AccountAndPassword.Remove(acc);
+                    TempUser.AccountAndPassword.Remove(ap);
+                 
+                    Database.WriteData(TempUser);
                     return true;
+
                 }
             }
 
@@ -58,8 +75,13 @@ using SecutityManager;
             Console.WriteLine(userName + " -> readAllPassword");
 
             string str = "";
-            
-            foreach(var s in Database.AllUsers[userName].AccountAndPassword)
+            User TempUser = Database.ReadData(userName);
+            if (TempUser == null)
+            {
+                throw new FieldAccessException("Please sign up");
+            }
+
+            foreach (var s in TempUser.AccountAndPassword)
             {
                 str += s.Key + "*" + s.Value + "/";
             }
@@ -72,14 +94,23 @@ using SecutityManager;
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> readPasswordFor");
 
-            if(Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            User TempUser = Database.ReadData(userName);
+            if (TempUser == null)
             {
-                return Database.AllUsers[userName].AccountAndPassword[acc];
+                throw new FieldAccessException("Please sign up");
             }
-            else
+
+            foreach (AccAndPass ap in TempUser.AccountAndPassword)
             {
-                return "";
-            }
+                if (ap.Key.Equals(acc))
+                
+                    return ap.Key + "*" + ap.Value + "/";
+
+                
+            } 
+
+             return "";
+            
 
             //procitati sifru za taj acc
         }
@@ -90,12 +121,25 @@ using SecutityManager;
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
             Console.WriteLine(userName + " -> savePassword");
 
-            if(!Database.AllUsers[userName].AccountAndPassword.ContainsKey(acc))
+            User TempUser = Database.ReadData(userName);
+            if (TempUser == null)
             {
-                Database.AllUsers[userName].AccountAndPassword[acc] = pass;
-                return true;
+                throw new FieldAccessException("Please sign up");
             }
-            return false;
+
+
+            foreach (AccAndPass ap in TempUser.AccountAndPassword)
+            {
+                if (ap.Key.Equals(acc))
+                    return false;
+            }
+            AccAndPass temp = new AccAndPass();
+            temp.Key = acc;
+            temp.Value = pass;
+            TempUser.AccountAndPassword.Add(temp);
+
+            Database.WriteData(TempUser);
+            return true;
             //dodati sifru u dictionary tog usera
         }
 
@@ -115,13 +159,15 @@ using SecutityManager;
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);//trenutno ime klijenta koji pristupa metodi
             Console.WriteLine(userName + " -> SingUp");
-            if(!Database.AllUsers.ContainsKey(userName))
+            User u = Database.ReadData(userName);
+            if(u==null)
             {
-                User u = new User();
+                u = new User();
                 u.Username = userName;
-                Database.AllUsers.Add(userName, u);
+                Database.WriteData(u);
                 return true;
             }
+          
             return false;          
             //prilikom prvog poziva napraviti usera i dodati u dictionary
         }
