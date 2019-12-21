@@ -11,6 +11,10 @@ namespace PCMService
     {
         public string getPassword(int numOfChar)
         {
+          int min= Int32.Parse(  Resource1.minLength);
+            if (numOfChar < min)
+                throw new ArgumentException("Minimum password length is 6 characters ");
+
             const string validLower = "abcdefghijklmnopqrstuvwxyz";
             const string validUper = "ABCDEFGHIJKLMNOPQRSTUVWXY";
             const string validNumber = "Z1234567890";
@@ -19,17 +23,16 @@ namespace PCMService
             Random rnd = new Random();
 
 
-            int lengthUpper = numOfChar/4;
-        
-            int lengthNuber = numOfChar / 4;
-            int lengthSpecial = numOfChar / 4;
+            int lengthUpper = numOfChar/5;
+            int lengthNuber = numOfChar / 5;
+            int lengthSpecial = numOfChar / 5;
             int lengthLower = numOfChar -(lengthUpper+ lengthNuber+ lengthSpecial);
-            while (0 < lengthUpper--)
+            while (0 < lengthLower--)
             {
                 res.Append(validLower[rnd.Next(validLower.Length)]);
             }
 
-            while (0 < lengthLower--)
+            while (0 < lengthUpper--)
             {
                 res.Append(validUper[rnd.Next(validUper.Length)]);
             }
@@ -50,23 +53,24 @@ namespace PCMService
 
         public string getRndPassword()
         {
-            //rnd pass of 6 character
+            //rnd pass of 8 character
+            int def =int.Parse (Resource1.defaultLength);
             const string validLower = "abcdefghijklmnopqrstuvwxyz";
             const string validUper="ABCDEFGHIJKLMNOPQRSTUVWXY";
             const string validNumber = "Z1234567890";
-           const string validSpecial="`~!@#$%^&*()_+";
+           const string validSpecial="`~!@#$%^&()_+";
             StringBuilder res = new StringBuilder();
             Random rnd = new Random();
-            int lengthUpper = 1;
-            int lengthLower = 3;
-            int lengthNuber = 1;
-            int lengthSpecial = 1;
-            while (0 < lengthUpper--)
+            int lengthUpper = def/5;
+            int lengthNuber = def/5;
+            int lengthSpecial = def / 5; 
+            int lengthLower = def - (lengthUpper + lengthNuber + lengthSpecial);
+            while (0 < lengthLower--)
             {
                 res.Append(validLower[rnd.Next(validLower.Length)]);
             }
 
-            while (0 < lengthLower--)
+            while (0 < lengthUpper--)
             {
                 res.Append(validUper[rnd.Next(validUper.Length)]);
             }

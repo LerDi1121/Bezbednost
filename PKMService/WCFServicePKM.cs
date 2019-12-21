@@ -104,7 +104,7 @@ using SecutityManager;
             {
                 if (ap.Key.Equals(acc))
                 
-                    return ap.Key + "*" + ap.Value + "/";
+                    return ap.Value ;
 
                 
             } 
