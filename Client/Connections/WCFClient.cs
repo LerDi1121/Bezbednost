@@ -163,7 +163,7 @@ namespace Client
             {
                 factory.SingUp();
                 Console.WriteLine("success singup.");
-                //Logger.AuthenticationSuccess("Client");
+           //     Logger.AuthenticationSuccess("Client");
                 return true;
             }
             catch (SecurityAccessDeniedException e)

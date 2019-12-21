@@ -47,7 +47,6 @@
     <Compile Include="CustomprincipalPCM.cs" />
     <Compile Include="CustomServiceAuthorizationManagerPCM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceAuthorizationManager.cs" />
     <Compile Include="Servicecertvalidation.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,7 @@ namespace Client
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/WCFServicePKM";
 
-         /*   using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
+           using (WCFClient proxy = new WCFClient(binding, new EndpointAddress(new Uri(address))))
             {
                 Console.ReadKey();
                     proxy.SingUp();
@@ -36,7 +36,7 @@ namespace Client
 
 
 
-            }*/
+            }
 
             string address2 = "net.tcp://localhost:9998/WCFServicePCM";
             NetTcpBinding binding2 = new NetTcpBinding();
