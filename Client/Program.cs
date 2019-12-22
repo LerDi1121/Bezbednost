@@ -41,6 +41,7 @@ namespace Client
                 Console.Write(".");
                 Console.WriteLine("");
                 PKM.SingUp();
+                PCM.getRndPassword();
 
 
             }

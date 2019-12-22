@@ -27,7 +27,7 @@ namespace SecutityManager
         public bool IsInRole(string permission)
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
-            string svrName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            string svrName = Formatter.ParseName(System.Security.Principal.WindowsIdentity.GetCurrent().Name);
             foreach (IdentityReference group in this.identity.Groups)
             {
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
