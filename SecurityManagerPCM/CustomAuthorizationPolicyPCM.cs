@@ -6,6 +6,7 @@ using System.IdentityModel.Policy;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SecurityManagerPCM
@@ -29,7 +30,8 @@ namespace SecurityManagerPCM
             IIdentity identity = identities[0];
             try
             {
-                Logger.AuthenticationSuccess("usernameParam");
+                string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
+                Logger.AuthenticationSuccess(userName);
             }
             catch
             {

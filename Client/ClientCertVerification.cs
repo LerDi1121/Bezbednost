@@ -18,8 +18,10 @@ namespace Client
 
             if (!certificate.Issuer.Equals(srvCert.Issuer))// provera da li je izdalo isto lice od poverenja 
             {
+                Logger.ClientCertVerificationFailed(certificate.SubjectName.Name,srvCert.SubjectName.Name);
                 throw new Exception("Certificate is not from the valid issuer.");
             }
+            Logger.ClientCertVerificationSuccess(certificate.SubjectName.Name, srvCert.SubjectName.Name);
         }
 
     }

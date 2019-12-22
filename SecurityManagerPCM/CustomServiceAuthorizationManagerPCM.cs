@@ -11,10 +11,7 @@ namespace SecurityManagerPCM
     {
         protected override bool CheckAccessCore(OperationContext operationContext)
         {
-            /***
-             * napraviti svoju logiku
-             * pozvati IsInRole u nasem principalu
-             * */
+            
 
             CustomPrincipalPCM principal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties["Principal"] as CustomPrincipalPCM;
             return principal.IsInRole("Read");

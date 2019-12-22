@@ -61,6 +61,60 @@ namespace Contract {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client {0} failed to verify certificate for server {1}.
+        /// </summary>
+        internal static string ClientCertVerificationFailed {
+            get {
+                return ResourceManager.GetString("ClientCertVerificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client {0} success verify certificate for server {1}.
+        /// </summary>
+        internal static string ClientCertVerificationSuccess {
+            get {
+                return ResourceManager.GetString("ClientCertVerificationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server {0} failed to verify certificate for Client {1}.
+        /// </summary>
+        internal static string ServerCertVverificationFailed {
+            get {
+                return ResourceManager.GetString("ServerCertVverificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server {0} success verify certificate for client {1}.
+        /// </summary>
+        internal static string ServerCertVverificationSuccess {
+            get {
+                return ResourceManager.GetString("ServerCertVverificationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server {0} read data from DataBase..
+        /// </summary>
+        internal static string ServiceReadDataFromDB {
+            get {
+                return ResourceManager.GetString("ServiceReadDataFromDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server {0} write data in DataBase..
+        /// </summary>
+        internal static string ServiceWriteDataInDB {
+            get {
+                return ResourceManager.GetString("ServiceWriteDataInDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User {0} successfully authenticated..
         /// </summary>
         internal static string UserAuthenticationSuccess {
@@ -84,6 +138,114 @@ namespace Contract {
         internal static string UserAuthorizationSuccess {
             get {
                 return ResourceManager.GetString("UserAuthorizationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to change password. Reason: {1}.
+        /// </summary>
+        internal static string UserChangePasswordFailed {
+            get {
+                return ResourceManager.GetString("UserChangePasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully change password..
+        /// </summary>
+        internal static string UserChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("UserChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to delete password. Reason: {1}.
+        /// </summary>
+        internal static string UserDeletePasswordFailed {
+            get {
+                return ResourceManager.GetString("UserDeletePasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully delete password..
+        /// </summary>
+        internal static string UserDeletePasswordSuccess {
+            get {
+                return ResourceManager.GetString("UserDeletePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed toget random password. Reason: {1}.
+        /// </summary>
+        internal static string UserGetRandomPasswordFailed {
+            get {
+                return ResourceManager.GetString("UserGetRandomPasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully get random password..
+        /// </summary>
+        internal static string UserGetRandomPasswordSuccess {
+            get {
+                return ResourceManager.GetString("UserGetRandomPasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to read password. Reason: {1}.
+        /// </summary>
+        internal static string UserReadPasswordFailed {
+            get {
+                return ResourceManager.GetString("UserReadPasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully read password..
+        /// </summary>
+        internal static string UserReadPasswordSuccess {
+            get {
+                return ResourceManager.GetString("UserReadPasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to save password. Reason: {1}.
+        /// </summary>
+        internal static string UserSavePasswordFailed {
+            get {
+                return ResourceManager.GetString("UserSavePasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully save password..
+        /// </summary>
+        internal static string UserSavePasswordSuccess {
+            get {
+                return ResourceManager.GetString("UserSavePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} failed to Singup. Reason: {1}.
+        /// </summary>
+        internal static string UserSingUpFailed {
+            get {
+                return ResourceManager.GetString("UserSingUpFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} successfully Singup..
+        /// </summary>
+        internal static string UserSingUpSuccess {
+            get {
+                return ResourceManager.GetString("UserSingUpSuccess", resourceCulture);
             }
         }
     }

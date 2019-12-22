@@ -13,8 +13,7 @@ namespace Contracts
 
         [OperationContract]
         bool SingUp();
-        [OperationContract]
-        bool SingIn();
+     
         [OperationContract]
         bool savePassword(string acc, string pass);
         [OperationContract]

@@ -7,6 +7,7 @@ using System.Text;
 using Contract;
 using System.Threading.Tasks;
 using Formatter = Contract.Formatter;
+using System.Threading;
 
 namespace SecutityManager
 {
@@ -25,6 +26,8 @@ namespace SecutityManager
 
         public bool IsInRole(string permission)
         {
+            string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
+            string svrName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             foreach (IdentityReference group in this.identity.Groups)
             {
                 SecurityIdentifier sid = (SecurityIdentifier)group.Translate(typeof(SecurityIdentifier));
@@ -36,10 +39,14 @@ namespace SecutityManager
                     foreach (string permision in permissions)
                     {
                         if (permision.Equals(permission))
+                        {
+                            Logger.AuthorizationSuccess(userName, svrName);
                             return true;
+                        }
                     }
                 }
             }
+            Logger.AuthorizationFailed(userName, svrName, "The client does not have a permit");
             return false;
         }
     }

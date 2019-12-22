@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contract;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,11 +24,14 @@ namespace PKMService
         
                 using (StreamReader sr = new StreamReader(path))
                 {
+                    
                     TempUser = (User)xmlSerializer.Deserialize(sr);
+                    Logger.ServiceReadDataFromDB("PKMService");
                 }
                
               
             } //citanje iz neke baze
+           
             return TempUser;
         }
         public static void WriteData(User u)
@@ -39,6 +43,7 @@ namespace PKMService
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     xmlSerializer.Serialize(sw, u);
+                    Logger.ServiceWriteDataInDB("PKMService");
                 }
             }
             //pisanje u neku bazu

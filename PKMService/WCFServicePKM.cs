@@ -22,6 +22,8 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
+                Logger.ChangePasswordFailed(userName, "User nis ot singup");
+
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -33,6 +35,7 @@ using SecutityManager;
                     ap.Value = newPassword;
                     TempUser.AccountAndPassword.Add(ap);
                     Database.WriteData(TempUser);
+                    Logger.ChangePasswordSuccess(userName);
                     return true;
 
                 }
@@ -50,6 +53,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
+                Logger.DeletePasswordFailed(userName, "User is not singup");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -60,6 +64,7 @@ using SecutityManager;
                     TempUser.AccountAndPassword.Remove(ap);
                  
                     Database.WriteData(TempUser);
+                    Logger.DeletePasswordSuccess(userName);
                     return true;
 
                 }
@@ -78,6 +83,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
+                Logger.ReadPasswordFailed(userName, "User is not singup");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -85,6 +91,7 @@ using SecutityManager;
             {
                 str += s.Key + "*" + s.Value + "/";
             }
+            Logger.ReadPasswordSuccess(userName);
             return str;
             //procitati sve sifre
         }
@@ -97,14 +104,15 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
+                Logger.ReadPasswordFailed(userName, "User is not singup");
                 throw new FieldAccessException("Please sign up");
             }
 
             foreach (AccAndPass ap in TempUser.AccountAndPassword)
             {
                 if (ap.Key.Equals(acc))
-                
-                    return ap.Value ;
+                    Logger.ReadPasswordSuccess(userName);
+                return ap.Value ;
 
                 
             } 
@@ -124,6 +132,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
+                Logger.SavePasswordFailed(userName, "User is not singup");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -139,21 +148,12 @@ using SecutityManager;
             TempUser.AccountAndPassword.Add(temp);
 
             Database.WriteData(TempUser);
+            Logger.SavePasswordSuccess(userName);
             return true;
             //dodati sifru u dictionary tog usera
         }
 
-       
-
-        
-
-        public bool SingIn()
-        {
-            string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
-            Console.WriteLine(userName + " -> SingIn");
-            return true;
-            //logovanje, kao neka funkcija za proveru konekcije, tj neki challenge response
-        }
+      
 
         public bool SingUp()
         {
@@ -165,9 +165,10 @@ using SecutityManager;
                 u = new User();
                 u.Username = userName;
                 Database.WriteData(u);
+                Logger.SingUpSuccess(userName);
                 return true;
             }
-          
+            Logger.SingUpFailed(userName, "The user is already singup");
             return false;          
             //prilikom prvog poziva napraviti usera i dodati u dictionary
         }

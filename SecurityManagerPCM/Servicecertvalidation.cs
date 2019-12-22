@@ -15,10 +15,11 @@ namespace SecurityManagerPCM
     {
         public override void Validate(X509Certificate2 certificate)
         {
-            X509Certificate2 srvCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, Formatter.ParseName(WindowsIdentity.GetCurrent().Name));
+            X509Certificate2 clnCert = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, Formatter.ParseName(WindowsIdentity.GetCurrent().Name));
 
-            if (!certificate.Issuer.Equals(srvCert.Issuer))// provera da li je izdat od istog licca od poverenja posto nam fali jedna validacija
+            if (!certificate.Issuer.Equals(clnCert.Issuer))// provera da li je izdat od istog licca od poverenja posto nam fali jedna validacija
             {
+                Logger.ServerCertVverificationFailed(certificate.SubjectName.Name, clnCert.SubjectName.Name);
                 throw new Exception("Certificate is not from the valid issuer.");
             }
 
@@ -33,8 +34,10 @@ namespace SecurityManagerPCM
             DateTime val = new DateTime(Int32.Parse(dates[2]), Int32.Parse(dates[1]), Int32.Parse(dates[0]));
             if(val < DateTime.Now.AddMonths(12))
             {
+                Logger.ServerCertVverificationFailed(certificate.SubjectName.Name, clnCert.SubjectName.Name);
                 throw new Exception("The certificate is valid for less than 12 months.");
             }
+            Logger.ServerCertVverificationSuccess(certificate.SubjectName.Name, clnCert.SubjectName.Name);
         }
     }
 }

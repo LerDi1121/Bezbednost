@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PCMService
@@ -11,10 +12,13 @@ namespace PCMService
     {
         public string getPassword(int numOfChar)
         {
-          int min= Int32.Parse(  Resource1.minLength);
+            string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
+            int min= Int32.Parse(  Resource1.minLength);
             if (numOfChar < min)
+            {
+                Logger.GetRandomPasswordFailed(userName, "User nis ot singup");
                 throw new ArgumentException("Minimum password length is 6 characters ");
-
+            }
             const string validLower = "abcdefghijklmnopqrstuvwxyz";
             const string validUper = "ABCDEFGHIJKLMNOPQRSTUVWXY";
             const string validNumber = "Z1234567890";
@@ -46,6 +50,7 @@ namespace PCMService
             {
                 res.Append(validSpecial[rnd.Next(validSpecial.Length)]);
             }
+            Logger.GetRandomPasswordSuccess(userName);
 
             return res.ToString();
 
@@ -84,6 +89,8 @@ namespace PCMService
             {
                 res.Append(validSpecial[rnd.Next(validSpecial.Length)]);
             }
+            string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);
+            Logger.GetRandomPasswordSuccess(userName);
 
             return res.ToString();
         }

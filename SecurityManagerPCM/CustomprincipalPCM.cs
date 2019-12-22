@@ -26,13 +26,7 @@ namespace SecurityManagerPCM
         public bool IsInRole(string role)
         {
             return true;
-            X509Certificate2 clientCertificate = ((X509CertificateClaimSet)OperationContext.Current.ServiceSecurityContext.AuthorizationContext.ClaimSets[0]).X509Certificate;
-            string organizationalUnit = clientCertificate.Subject.Split(',')[1].Split('=')[1];
-
-            if (organizationalUnit == role)
-                return true;
-
-            return false;
+   
         }
     }
 }

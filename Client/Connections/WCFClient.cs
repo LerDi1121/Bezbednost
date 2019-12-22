@@ -141,28 +141,13 @@ namespace Client
         }
 
 
-        public bool SingIn()
-        {
-            try
-            {
-                factory.SingIn();
-                Console.WriteLine("success singin.");
-                return true;
-            }
-            catch (SecurityAccessDeniedException e)
-            {
-                Console.WriteLine("Error while trying to singin. Error message : {0}", e.Message);
-            }
-            return false;
-        }
-
         public bool SingUp()
         {
            
             try
             {
                 factory.SingUp();
-                Console.WriteLine("success singup.");
+                Console.WriteLine("Success singup.");
            //     Logger.AuthenticationSuccess("Client");
                 return true;
             }
