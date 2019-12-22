@@ -35,7 +35,7 @@ namespace Client.Connections
             string str= null;
             try
             {
-                str=factory.getPassword(9);
+                str=factory.getPassword(numOfChar);
                 Console.WriteLine("success getPassword.");
                
             }

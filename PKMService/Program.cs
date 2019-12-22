@@ -18,8 +18,8 @@ namespace PKMService
     {
         static void Main(string[] args)
         {
-     
 
+            CryptoAlgorithms.GenerateKey();
             PKMServiceHost Pkm = new PKMServiceHost();
 
             Pkm.host.Open();

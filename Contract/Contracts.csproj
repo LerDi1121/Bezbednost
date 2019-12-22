@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="CertManager.cs" />
     <Compile Include="AuditEvent.cs" />
+    <Compile Include="CryptoAlgorithms.cs" />
     <Compile Include="Formatter.cs" />
     <Compile Include="IWCFServicePCM.cs" />
     <Compile Include="IWCFServicePKM.cs" />

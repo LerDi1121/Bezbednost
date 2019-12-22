@@ -25,8 +25,8 @@ namespace Client
             binding2.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
             X509Certificate2 ServCert = CertManager.GetCertificateFromStorage(StoreName.TrustedPeople, StoreLocation.LocalMachine, "Selenic");//sertifikat servera 
             EndpointAddress Endaddress = new EndpointAddress(new Uri(address2), new X509CertificateEndpointIdentity(ServCert));
-            WCFClient PKM;
-            WCFClientPCM PCM;
+            WCFClient PKM= null;
+            WCFClientPCM PCM= null;
             try
             {
                  PKM    = new WCFClient(binding, new EndpointAddress(new Uri(address)));
@@ -59,6 +59,104 @@ namespace Client
                     if (Chose.ToLower().Equals("exit"))
                     {
                         break;
+                    }
+                    int temp;
+                   if(! Int32.TryParse(Chose, out temp))
+                    {
+                        continue;
+                    }
+                   if(temp<1 && temp> 6)
+                    {
+                        continue;
+                    }
+                   switch(temp)
+                    {
+                        case 1://cuvanje lozinke
+
+                            Console.WriteLine( "Unesite nalog za koji zelite sacuvati lozinku");
+                            string acc = Console.ReadLine();
+                            Console.WriteLine("Unesite lozinku");
+                            string pass = Console.ReadLine();
+                            PKM.savePassword(acc, pass);
+                            break;
+                        case 2://generisanje
+                            Console.WriteLine("\t1. Generisanje sifre od strane servera");
+
+                            Console.WriteLine("\t1. Generisanje sifre od strane servera sa zadatom duzinom(veca od 6 karaktera)");
+                            string tempgen = Console.ReadLine();
+                            int numb;
+                            if(! Int32.TryParse(tempgen, out numb))
+                            {
+                                Console.WriteLine("Unesite broj!!!");
+                                continue;
+                            }
+                            if(numb == 1)
+                            {
+                                string tempPass= PCM.getRndPassword();
+                                Console.WriteLine("Vasa sifra je : "+ tempPass);
+                                Console.WriteLine("Da li zelite da je sacuvate? Y/N");
+                                ConsoleKeyInfo yn = Console.ReadKey();
+                                if (yn.Key == ConsoleKey.Y)
+                                {
+                                    Console.WriteLine("Unesite nalog za koji zelite da sacuvate: ");
+                                    string TempAcc = Console.ReadLine();
+                                    PKM.savePassword(TempAcc, tempPass);
+
+                                }
+                                else
+                                    continue;
+
+                            }
+                            else if(numb==2)
+                            {
+                                Console.WriteLine("Unesite broj karaktera: ");
+                                string numberOfchar = Console.ReadLine();
+                                int numbCh;
+                                if(int.TryParse(numberOfchar,out numbCh))
+                                {
+                                    string tempPass = PCM.getPassword(numbCh);
+                                    Console.WriteLine("Vasa sifra je : " + tempPass);
+                                    Console.WriteLine("Da li zelite da je sacuvate? Y/N");
+                                    ConsoleKeyInfo yn = Console.ReadKey();
+                                    if (yn.Key == ConsoleKey.Y)
+                                    {
+                                        Console.WriteLine("Unesite nalog za koji zelite da sacuvate: ");
+                                        string TempAcc = Console.ReadLine();
+                                        PKM.savePassword(TempAcc, tempPass);
+
+                                    }
+                                    else
+                                        continue;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("unesite broj!!!");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unesli ste nevazeci broj!");
+                            }
+                            break;
+                        case 3://izmena
+
+                            break;
+                        case 4://brisanje 
+
+                            break;
+                        case 5://citanje lozinke za odredjen acc
+
+                            break;
+                        case 6://citanje svih sifri
+                            Console.WriteLine("Vase sifre su");
+                            PKM.readAllPassword();
+                            break;
+                        default:
+                            continue;
+
+                         
+                            
+
                     }
                    
                 }

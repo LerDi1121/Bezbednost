@@ -119,7 +119,13 @@ namespace Client
 
         public bool savePassword(string acc, string pass)
         {
-             
+           /* string CryAcc= null;
+            CryptoAlgorithms.EncryptString(acc, out CryAcc);
+            Console.WriteLine("Crypto acc: "+CryAcc);
+
+            string DecAcc = null;
+            CryptoAlgorithms.DecryptString(CryAcc,out DecAcc);
+            Console.WriteLine("Decty acc: "+ DecAcc);*/
             try
             {
                 if (factory.savePassword(acc, pass))
