@@ -40,6 +40,7 @@ using SecutityManager;
 
                 }
             }
+            Logger.ChangePasswordFailed(userName, "Accaunt does not exist");
             return false;
             //menjanje sifre
         }
@@ -69,7 +70,7 @@ using SecutityManager;
 
                 }
             }
-
+            Logger.DeletePasswordFailed(userName, "Accaunt does not exist");
             return false;
             //obrisi sifru
         }
@@ -111,8 +112,10 @@ using SecutityManager;
             foreach (AccAndPass ap in TempUser.AccountAndPassword)
             {
                 if (ap.Key.Equals(acc))
+                {
                     Logger.ReadPasswordSuccess(userName);
-                return ap.Value ;
+                    return ap.Value;
+                }
 
                 
             } 
@@ -140,7 +143,10 @@ using SecutityManager;
             foreach (AccAndPass ap in TempUser.AccountAndPassword)
             {
                 if (ap.Key.Equals(acc))
+                {
+                    Logger.SavePasswordFailed(userName, "Accaunt already exist");
                     return false;
+                }
             }
             AccAndPass temp = new AccAndPass();
             temp.Key = acc;

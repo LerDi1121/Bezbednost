@@ -139,13 +139,30 @@ namespace Client
                             }
                             break;
                         case 3://izmena
+                            Console.WriteLine("Unesite navin naloga kojem zelite da promenite sifru: ");
+                            string tempacc = Console.ReadLine();
+                            Console.WriteLine("Unesite staru lozinku:");
+                        
+                            string oldPass = Console.ReadLine();
+                            Console.WriteLine( "Unesite novu lozinku :");
+                            string newPass= Console.ReadLine();
+                            PKM.changePassword(tempacc, newPass, oldPass);
 
                             break;
                         case 4://brisanje 
+                            Console.WriteLine("Unesite navin naloga kojem zelite da izbrisete sifru: ");
+                            string deleteAccc = Console.ReadLine();
+                            Console.WriteLine("Unesite lozinku:");
 
+                            string deletePass = Console.ReadLine();
+                            PKM.deletePassword(deleteAccc, deletePass);
                             break;
                         case 5://citanje lozinke za odredjen acc
+                            Console.WriteLine("Unesite naziv naloga za koji zelite da procitate sifru: ");
+                            string readAcc = Console.ReadLine();
+                            PKM.readPasswordFor(readAcc);
 
+                            
                             break;
                         case 6://citanje svih sifri
                             Console.WriteLine("Vase sifre su");
