@@ -29,7 +29,7 @@ namespace SecurityManagerPCM
 
 
             //ispitivanje da li sertifikat vazi manje od 12 meseci 
-            string date =certificate.GetExpirationDateString();
+            string date =clnCert.GetExpirationDateString();
             string[] dates = date.Split('.');
             DateTime val = new DateTime(Int32.Parse(dates[2]), Int32.Parse(dates[1]), Int32.Parse(dates[0]));
             if(val < DateTime.Now.AddMonths(12))

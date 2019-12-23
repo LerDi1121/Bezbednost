@@ -24,7 +24,7 @@ namespace PCMService.Connection
             //sertifikati
             binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Certificate;
             string address = "net.tcp://localhost:9998/WCFServicePCM";
-         //   binding.Security.Transport.ClientCredentialType = TcpClientCredentialType.Windows;// za win autent
+
             host = new ServiceHost(typeof(WCFServicePCM));
             host.AddServiceEndpoint(typeof(IWCFServicePCM), binding, address);
 
@@ -40,18 +40,7 @@ namespace PCMService.Connection
 
             ///Set appropriate service's certificate on the host. Use CertManager class to obtain the certificate based on the "srvCertCN"
             host.Credentials.ServiceCertificate.Certificate = CertManager.GetCertificateFromStorage(StoreName.My, StoreLocation.LocalMachine, Formatter.ParseName(WindowsIdentity.GetCurrent().Name));
-            ///// za Custom principal, da proveri da li korisnik ima permisiju getPass
-            ///
-            // za metodu CheckAccessCore-
-            //host.Authorization.ServiceAuthorizationManager = new CustomServiceAuthorizationManagerPCM();
-            //podesavanje za custom principal
-           // host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
-
-            List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
-            policies.Add(new CustomAuthorizationPolicyPCM());
-            host.Authorization.ExternalAuthorizationPolicies = policies.AsReadOnly();
-            host.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
 
         }

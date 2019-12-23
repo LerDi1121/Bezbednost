@@ -147,13 +147,13 @@ namespace Client
         }
 
 
-        public bool SingUp()
+        public bool SignUp()
         {
            
             try
             {
-                factory.SingUp();
-                Console.WriteLine("Success singup.");
+                factory.SignUp();
+                Console.WriteLine("Success SIGN UP.");
            //     Logger.AuthenticationSuccess("Client");
                 return true;
             }

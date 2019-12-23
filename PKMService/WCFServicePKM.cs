@@ -22,7 +22,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
-                Logger.ChangePasswordFailed(userName, "User nis ot singup");
+                Logger.ChangePasswordFailed(userName, "User is not signed up");
 
                 throw new FieldAccessException("Please sign up");
             }
@@ -54,7 +54,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
-                Logger.DeletePasswordFailed(userName, "User is not singup");
+                Logger.DeletePasswordFailed(userName, "User is not signed up");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -84,7 +84,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
-                Logger.ReadPasswordFailed(userName, "User is not singup");
+                Logger.ReadPasswordFailed(userName, "User is not signed up");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -105,7 +105,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
-                Logger.ReadPasswordFailed(userName, "User is not singup");
+                Logger.ReadPasswordFailed(userName, "User is not signed up");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -135,7 +135,7 @@ using SecutityManager;
             User TempUser = Database.ReadData(userName);
             if (TempUser == null)
             {
-                Logger.SavePasswordFailed(userName, "User is not singup");
+                Logger.SavePasswordFailed(userName, "User is not signed up");
                 throw new FieldAccessException("Please sign up");
             }
 
@@ -161,7 +161,7 @@ using SecutityManager;
 
       
 
-        public bool SingUp()
+        public bool SignUp()
         {
             string userName = Formatter.ParseName(Thread.CurrentPrincipal.Identity.Name);//trenutno ime klijenta koji pristupa metodi
             Console.WriteLine(userName + " -> SingUp");

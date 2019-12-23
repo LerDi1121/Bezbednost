@@ -19,6 +19,7 @@ namespace Client
             Thread.Sleep(1000);
             NetTcpBinding binding = new NetTcpBinding();
             string address = "net.tcp://localhost:9999/WCFServicePKM";
+
             string address2 = "net.tcp://localhost:9998/WCFServicePCM";
             NetTcpBinding binding2 = new NetTcpBinding();
    
@@ -40,8 +41,8 @@ namespace Client
                 Thread.Sleep(300);
                 Console.Write(".");
                 Console.WriteLine("");
-                PKM.SingUp();
-                PCM.getRndPassword();
+                PKM.SignUp();
+             
 
 
             }
@@ -55,7 +56,7 @@ namespace Client
                 {
                     Meni();
                     string Chose = Console.ReadLine();
-                    Console.WriteLine(Chose);
+                 
                     if (Chose.ToLower().Equals("exit"))
                     {
                         break;
@@ -82,7 +83,7 @@ namespace Client
                         case 2://generisanje
                             Console.WriteLine("\t1. Generisanje sifre od strane servera");
 
-                            Console.WriteLine("\t1. Generisanje sifre od strane servera sa zadatom duzinom(veca od 6 karaktera)");
+                            Console.WriteLine("\t2. Generisanje sifre od strane servera sa zadatom duzinom(veca od 6 karaktera)");
                             string tempgen = Console.ReadLine();
                             int numb;
                             if(! Int32.TryParse(tempgen, out numb))

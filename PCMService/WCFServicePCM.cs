@@ -16,7 +16,7 @@ namespace PCMService
             int min= Int32.Parse(  Resource1.minLength);
             if (numOfChar < min)
             {
-                Logger.GetRandomPasswordFailed(userName, "User nis ot singup");
+                Logger.GetRandomPasswordFailed(userName, "User is not signed up.");
                 throw new ArgumentException("Minimum password length is 6 characters ");
             }
             const string validLower = "abcdefghijklmnopqrstuvwxyz";

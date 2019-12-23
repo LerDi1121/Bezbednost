@@ -60,10 +60,7 @@ namespace Contract
             DESCryptoServiceProvider desCrypto = new DESCryptoServiceProvider();
             desCrypto.Key = ASCIIEncoding.ASCII.GetBytes(secretKey);
             desCrypto.Mode = CipherMode.CBC;
-           
-
-            
-                desCrypto.GenerateIV();
+            desCrypto.GenerateIV();
 
                 ICryptoTransform desEncrypt = desCrypto.CreateEncryptor();
             encrypted =desEncrypt.TransformFinalBlock(body, 0, body.Length);
@@ -98,10 +95,10 @@ namespace Contract
             DESCryptoServiceProvider desCrypto = new DESCryptoServiceProvider();
             desCrypto.Key = ASCIIEncoding.ASCII.GetBytes(secretKey);
             desCrypto.Mode = CipherMode.CBC;
-           // desCrypto.Padding = PaddingMode.None;
+            // desCrypto.Padding = PaddingMode.None;
+         //   desCrypto.GenerateIV();
 
-         
-                desCrypto.IV = body.Take(desCrypto.BlockSize / 8).ToArray();                // take the iv off the beginning of the ciphertext message			
+            desCrypto.IV = body.Take(desCrypto.BlockSize / 8).ToArray();                // take the iv off the beginning of the ciphertext message			
 
                 ICryptoTransform desDecrypt = desCrypto.CreateDecryptor();
             outString =utf8.GetString( desDecrypt.TransformFinalBlock(body, 0, body.Length));
